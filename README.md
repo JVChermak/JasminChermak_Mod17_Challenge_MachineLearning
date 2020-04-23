@@ -1,4 +1,4 @@
-# Supervised Machine Learning
+# Supervised Machine Learning: Predicting Loan Risk
 
 ## Overview of the Project
 Train and evaluate machine learning models to predict risky loans given data with unbalanced classes. The following resampling methods were employed:
@@ -18,7 +18,7 @@ For the purpose of these models, loan status has been changed into 0 for high ri
 
 In the case of credit risk, it is better to look at the recall score with the idea that we know a certain number of loans are high risk and want to know how likely the model is to identify them. With that in mind, I would recommend the SMOTEENN method of resampling for the model. The F1 scores for SMOTE are 1% higher than SMOTEENN, but the recall score of SMOTEENN was 1% higher than SMOTE for the high risk loans. I would also suggest that the lending company be cautious in using this model because the precision rate for high risk loans is extremely low and therefore falsely identifies low risk loans as high risk loans.
 
-### Summary of Models for High Risk Loans
+### Summary of Resampling Models for High Risk Loans
 | ML Model | Balanced accuracy score | Precision | Recall | F1 |
 | :--- | :---: | :---: | :---: | :---: |
 | RandomOverSampler | 0.7864 | 0.03 | 0.71 | 0.05 |
@@ -35,3 +35,9 @@ Train, evaluate and compare two different ensemble classifiers listed below to p
 For the sake of comparison, pd.get_dummies() was also used for the ensemble models and loan status was changed so that 0 is high risk and 1 is low risk. While the precision of each model is still in the single digit percents, the recall of the Easy Ensemble AdaBoost Classifier, which correctly identifies high risk loans, is at 91%. This is the best prediction rate of any of the models and shows the least "false negatives" or falsely classifying a high risk loan as a low risk loan. The balanced accuracy score for Easy Ensemble was also much higher at 92.64%. The Easy Ensemble model is the better model to use. However, the lending company should be aware of the low precision rate for high risk loans at 8%, which falsely identifies several loans that are low risk as high risk.
 
 To improve the Balanced Random Forest model, several of the features that have been identified as having 0 importance could be removed and the model run again.
+
+### Summary of Ensemble Models for High Risk Loans
+| ML Model | Balanced accuracy score | Precision | Recall | F1 |
+| :--- | :---: | :---: | :---: | :---: |
+| BalancedRandomForest Classifier | 0.7725 | 0.03 | 0.64 | 0.06 |
+| Easy Ensemble AdaBoost | 0.9264 | 0.08 | 0.91 | 0.14 |
