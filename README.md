@@ -14,9 +14,17 @@ Train and evaluate machine learning models to predict risky loans given data wit
 ## Resampling Analysis
 There were a number of categorical features in the original data set. To prepare to run the various machine learning models, pd.get_dummies() was used in the "encoding" version of each file with the first column dropped to remove redundancy. This was a change from the initial use of LabelEncoder because some items may have been given incorrect weight rather than being converted into binary data.
 
-For the purpose of these models, loan status has been changed into 0 for high risk and 1 for low risk. In each model, the precision for predicting a high risk loan was terrible at 2% or 3%. The F1 score for high risk was also extremely low, with the highest for SMOTE having an F1 score of 6%, and the lowest for undersampling (ClusterCentroids) having an F1 of 3%. SMOTEENN had the highest balanced accuracy score of 79.73% and SMOTE being close behind with 79.66%. The highest recall score for the high risk loan status was the ClusterCentroid method with a score of 78%, but the recall of the low risk status was actually at least 10% lower than for the oversampling methods.
+For the purpose of these models, loan status has been changed into 0 for high risk and 1 for low risk. In each model, the precision for predicting a high risk loan was terrible at 2% or 3%. The F1 score for high risk was also extremely low, with the highest for SMOTE having an F1 score of 6%, and the lowest for ClusterCentroids having an F1 of 3%. SMOTEENN had the highest balanced accuracy score of 79.73% and SMOTE being close behind with 79.66%. The highest recall score for the high risk loan status was the ClusterCentroid method with a score of 78%, but the recall of the low risk status was actually at least 10% lower than for the oversampling methods.
 
 In the case of credit risk, it is better to look at the recall score with the idea that we know a certain number of loans are high risk and want to know how likely the model is to identify them. With that in mind, I would recommend the SMOTEENN method of resampling for the model. The F1 scores for SMOTE are 1% higher than SMOTEENN, but the recall score of SMOTEENN was 1% higher than SMOTE for the high risk loans. I would also suggest that the lending company be cautious in using this model because the precision rate for high risk loans is extremely low and therefore falsely identifies low risk loans as high risk loans.
+
+### Summary of Models for High Risk Loans
+| ML Model | Balanced accuracy score | Precision | Recall | F1 |
+| :--- | :---: | :---: | :---: | :---: |
+| RandomOverSampler | 0.7864 | 0.03 | 0.71 | 0.05 |
+| SMOTE | 0.7966 | 0.03 | 0.71 | 0.06 |
+| ClusterCentroids | 0.7708 | 0.02 | 0.78 | 0.03 |
+| SMOTEENN | 0.7973 | 0.03 | 0.72 | 0.05 |
 
 ## Extension
 Train, evaluate and compare two different ensemble classifiers listed below to predict loan risk.
